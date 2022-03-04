@@ -1,6 +1,6 @@
 from binance.client import Client
+from config import BINANCE_API_KEY, BINANCE_API_SECRET
 import pandas as pd
-import os
 
 from app.enums import Asset
 
@@ -8,10 +8,7 @@ from app.enums import Asset
 class BinanceService:
 
     def __init__(self):
-        self.client = Client(
-            os.environ.get('binance_key'),
-            os.environ.get('binance_secret')
-        )
+        self.client = Client(BINANCE_API_KEY, BINANCE_API_SECRET)
 
     def get_all_symbols(self):
         return [s['symbol'] for s in (self.client.get_exchange_info())['symbols']]
